@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-visualizer"></div>
+    
+    <div class="app-container">
+        <main id="lyricsContainer">
+            <div class="placeholder">Drag and drop files to start</div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="glass-card player-controls">
+                <div class="track-info">
+                    <h2 id="trackName">No Track</h2>
+                    <p id="lrcName">Lyrics not loaded</p>
+                </div>
+                
+                <div class="progress-area">
+                    <input type="range" id="progress" value="0" step="0.1">
+                    <div class="time-info">
+                        <span id="currTime">0:00</span>
+                        <span id="durTime">0:00</span>
+                    </div>
+                </div>
+
+                <div class="volume-area">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7">
+                </div>
+
+                <div class="buttons">
+                    <button id="playBtn">
+                        <svg id="playIcon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="drop-zone" id="audioDrop">
+                <input type="file" id="audioFile" accept="audio/*" hidden>
+                <p>Drop track here or <button class="glass-btn" onclick="document.getElementById('audioFile').click()">Upload Audio</button></p>
+            </div>
+            <div class="drop-zone" id="lrcDrop">
+                <input type="file" id="lrcFile" accept=".lrc,.ass" hidden>
+                <p>Drop lyrics here or <button class="glass-btn" onclick="document.getElementById('lrcFile').click()">Upload Lyrics</button></p>
+            </div>
+        </aside>
+    </div>
+
+    <audio id="audioElement"></audio>
+    <script src="main.js"></script>
+</body>
+</html>
