@@ -48,7 +48,7 @@ setupDropZone('lrcDrop', file => {
     const reader = new FileReader();
     reader.onload = e => parseLRC(e.target.result);
     reader.readAsText(file);
-    document.getElementById('lrcName').textContent = formatFileName(file.name);
+    document.getElementById('lrcName').textContent = `Lyrics: ${file.name}`;
 });
 
 document.getElementById('audioFile').onchange = e => {
