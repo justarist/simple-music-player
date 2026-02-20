@@ -3,6 +3,11 @@ const lyricsContainer = document.getElementById('lyricsContainer');
 const playBtn = document.getElementById('playBtn');
 const progress = document.getElementById('progress');
 
+const lrcModal = document.getElementById('lrcModal');
+const lrclibBtn = document.getElementById('lrclibBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const searchLrcBtn = document.getElementById('searchLrcBtn');
+
 let lyricsData = [];
 
 const pauseIcon = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
@@ -16,6 +21,60 @@ playBtn.onclick = () => {
         audio.pause();
         document.getElementById('playIcon').innerHTML = playIcon;
     }
+};
+
+lrclibBtn.onclick = () => {
+    const currentTrack = document.getElementById('trackName').textContent;
+    if (currentTrack !== "No Track") {
+        document.getElementById('modalTrack').value = currentTrack;
+    }
+    lrcModal.style.display = 'flex';
+};
+
+closeModalBtn.onclick = () => lrcModal.style.display = 'none';
+
+searchLrcBtn.onclick = async () => {
+    const artist = document.getElementById('modalArtist').value;
+    const track = document.getElementById('modalTrack').value;
+    const album = document.getElementById('modalAlbum').value;
+    const duration = Math.round(audio.duration);
+
+    if (!artist || !track) {
+        alert("Artist and Track Name are required.");
+        return;
+    }
+
+    searchLrcBtn.textContent = "Searching...";
+    
+    try {
+        let url = `https://lrclib.net/api/get?artist_name=${encodeURIComponent(artist)}&track_name=${encodeURIComponent(track)}`;
+        if (album) url += `&album_name=${encodeURIComponent(album)}`;
+        if (duration) url += `&duration=${duration}`;
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Lyrics not found");
+        
+        const data = await response.json();
+        
+        const lyricsToParse = data.syncedLyrics || data.plainLyrics;
+        
+        if (lyricsToParse) {
+            parseLRC(lyricsToParse);
+            document.getElementById('lrcName').textContent = `Lyrics: ${track} (from LRCLIB)`;
+            lrcModal.style.display = 'none';
+        } else {
+            alert("No lyrics available for this track.");
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Could not find lyrics on LRCLIB.");
+    } finally {
+        searchLrcBtn.textContent = "Search";
+    }
+};
+
+window.onclick = (event) => {
+    if (event.target == lrcModal) lrcModal.style.display = 'none';
 };
 
 audio.ontimeupdate = () => {

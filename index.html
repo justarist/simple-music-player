@@ -44,12 +44,29 @@
             </div>
             <div class="drop-zone" id="lrcDrop">
                 <input type="file" id="lrcFile" accept=".lrc,.ass" hidden>
-                <p>Drop lyrics here or <button class="glass-btn" onclick="document.getElementById('lrcFile').click()">Upload Lyrics</button></p>
+                <p>Drop lyrics here or
+                    <button class="glass-btn" onclick="document.getElementById('lrcFile').click()">Upload Lyrics</button>
+                </p>
             </div>
+            <button class="glass-btn" id="lrclibBtn">Get lyrics from LRCLIB</button>
         </aside>
     </div>
 
     <audio id="audioElement"></audio>
+
+    <div id="lrcModal" class="modal">
+        <div class="glass-card modal-content">
+            <h3>Fetch Lyrics from LRCLIB</h3>
+            <input type="text" id="modalTrack" placeholder="Track Name">
+            <input type="text" id="modalArtist" placeholder="Artist Name">
+            <input type="text" id="modalAlbum" placeholder="Album Name">
+            <div class="modal-buttons">
+                <button class="glass-btn" id="searchLrcBtn">Search</button>
+                <button class="glass-btn" id="closeModalBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>
