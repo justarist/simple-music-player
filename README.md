@@ -10,6 +10,7 @@ A lightweight, browser-based audio player designed for high-precision lyric sync
 - **Interactive Navigation**: Supports audio seeking by clicking on individual words or entire lines within the lyric display.
 - **Local File Processing**: Operates entirely within the client-side environment. No audio or lyric data is uploaded to external servers, ensuring user privacy.
 - **Dual-Input Interface**: Supports both drag-and-drop functionality and traditional file selection buttons for music and lyric loading.
+- **Fetching lyrics from LRCLIB**: Supports fetching lyrics from LRCLIB by track name, artist name and album name (you have to fill it manually)
 
 ## Usage Instructions
 
@@ -26,6 +27,7 @@ A lightweight, browser-based audio player designed for high-precision lyric sync
   - HTML5 Audio API for playback and time tracking.
   - iTunes Search API for artwork metadata.
   - File API for local file reading.
+  - LRCLIB for fetching lyrics
 - **Synchronization**: Uses `requestAnimationFrame` for high-frequency UI updates, ensuring smooth animations at 60 frames per second.
 
 ## Supported Formats
