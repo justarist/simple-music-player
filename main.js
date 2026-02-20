@@ -66,7 +66,7 @@ document.getElementById('lrcFile').onchange = e => {
         const reader = new FileReader();
         reader.onload = ev => parseLRC(ev.target.result);
         reader.readAsText(e.target.files[0]);
-        document.getElementById('lrcName').textContent = formatFileName(e.target.files[0].name);
+        document.getElementById('lrcName').textContent = `Lyrics: ${e.target.files[0].name}`;;
     }
 };
 
